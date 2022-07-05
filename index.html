@@ -8,26 +8,46 @@
 <body>
   
   <h1>Sign in with Google</h1>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <div id="g_id_onload"
+     data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up.apps.googleusercontent.com"
+     data-login_uri="https://oholeitorah.github.io/"
+     data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+     data-type="standard"
+     data-size="large"
+     data-theme="outline"
+     data-text="sign_in_with"
+     data-shape="rectangular"
+     data-logo_alignment="left">
+  </div>
 
 
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+<!--   <script src="https://apis.google.com/js/platform.js" async defer></script> -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   
   
   
   
-  
-  <script>
-    function onSignIn(googleUser) {
-      console.log('got here');
-    var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
-  </script>
+      <script>
+        function handleCredentialResponse(response) {
+          console.log("Encoded JWT ID token: " + response.credential);
+        }
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "YOUR_GOOGLE_CLIENT_ID",
+            callback: handleCredentialResponse
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+          );
+          google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+    </script>
+    <div id="buttonDiv"></div> 
   
   </body>
 </html>
