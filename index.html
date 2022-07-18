@@ -37,12 +37,14 @@
           console.log("Encoded JWT ID token: " + response.credential);
           var response = decodeJwtResponse(response.credential);
           var options = {
-            Method: 'POST',
-            Headers: {
-              Accept: 'application.json',
-              'Content-Type': 'application/json'
-            },
-            Body: JSON.stringify(response),
+            method: 'POST',
+            contentType: 'application/json',
+            payload: JSON.stringify(response)
+//             Headers: {
+//               Accept: 'application.json',
+//               'Content-Type': 'application/json'
+//             },
+//             Body: JSON.stringify(response),
 //             Cache: 'default'            
           }
           console.log(response);
