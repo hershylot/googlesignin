@@ -7,7 +7,7 @@
   </head>
 <body>
   
-  <h1>Sign in with Google - Test 18</h1>
+  <h1>Sign in with Google - Test 19</h1>
   <div id="g_id_onload"
      data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up"
      data-login_uri="https://oholeitorah.github.io/"
@@ -55,18 +55,16 @@
           fetch('https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec', options)
           .then(response => response.json())
           .then(obj => {
-            console.log(obj);
-            console.log(obj.data);
-            console.log(obj.data.ID);
-            if(!obj.data.ID){
+            if(!obj.data.Token){
               Swal.fire(
                 'Uh Oh!',
                 'We were unable to locate your account (' + obj.data.EmailAddress + ') in our records. Please reach out to the finanacial office. Thank you',
                 'error'
               )              
             }else{
-              window.localStorage.setItem('id', obj.data.ID + ' - ' + obj.data.EmailAddress);
-              window.location.replace("https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec");
+              var url = "https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec";
+              var params = `?token=${obj.data.Token}`;
+              window.location.replace(url + params);
             }
             //take action based on true or false
           });
