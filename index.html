@@ -7,9 +7,12 @@
     <style>
       html {
         background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-          background-size: 400% 400%;
-          animation: gradient 15s ease infinite;
-          height: 100vh;
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+        margin: auto;
+        width: 50%;
+        padding: 10px;
       }
       
         @keyframes gradient {
@@ -73,17 +76,20 @@
         to {transform:rotate(360deg);}
       }
       
+      #credentials-picker-container{
+         position: relative !important;
+      }
+      
       </style>
   </head>
 <body>
-  
-  <h1>Sign in with Google - Test 22</h1>
+<img src = "https://res.cloudinary.com/oholeitorah/images/f_auto,q_auto/v1636864448/Oholei-Torah-Logo-Color/Oholei-Torah-Logo-Color.png?_i=AA" width="180px" height="180" background-color='#78909c' class = 'hide-on-small-only'>
+  <h1>Welcome to the Oholei Torah Employee Portal! Please sign in. 23</h1>
   <div id="g_id_onload"
      data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up"
      data-login_uri="https://oholeitorah.github.io/"
      data-auto_select="true"
-<!--      data-auto_prompt="false"> -->
-  >
+     data-auto_prompt="false">
   </div>
 <!--   <div class="g_id_signin"
      data-type="standard"
@@ -167,7 +173,7 @@
           return JSON.parse(jsonPayload);        
         }
     </script>
-    <div id="buttonDiv"></div> 
+    <div id="buttonDiv" style = 'display: none'></div> 
   
   </body>
 </html>
