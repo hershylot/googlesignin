@@ -6,10 +6,25 @@
     <meta name="google-signin-client_id" content="712871956261-l85reugeijrjs9donqeh4j6dboev17up.apps.googleusercontent.com">
     <style>
       html {
-        background: #005C97;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #363795, #005C97);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #363795, #005C97); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+          background-size: 400% 400%;
+          animation: gradient 15s ease infinite;
+          height: 100vh;
       }
+      
+        @keyframes gradient {
+          0% {
+              background-position: 0% 50%;
+          }
+
+          50% {
+              background-position: 100% 50%;
+          }
+
+          100% {
+              background-position: 0% 50%;
+          }
+        }
 
       .spinner {
         position: relative;
@@ -93,7 +108,7 @@
       <script>
         function handleCredentialResponse(response) {
           document.getElementById('spinner').style.display = 'block';
-          console.log("Encoded JWT ID token: " + response.credential);
+//           console.log("Encoded JWT ID token: " + response.credential);
           var response = decodeJwtResponse(response.credential);
           var options = {
             method: 'POST',
@@ -110,7 +125,6 @@
 //             Body: JSON.stringify(response),
 //             Cache: 'default'            
           }
-          console.log(response);
           fetch('https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec', options)
           .then(response => response.json())
           .then(obj => {
