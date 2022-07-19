@@ -54,18 +54,18 @@
           console.log(response);
           fetch('https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec', options)
           .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            console.log(data.ID);
-            console.log(JSON.parse(data));
-            if(!data.ID){
+          .then(obj => {
+            console.log(obj);
+            console.log(obj.data);
+            console.log(obj.data.ID);
+            if(!obj.data.ID){
               Swal.fire(
                 'Uh Oh!',
-                'We were unable to locate your account (' + data.EmailAddress + ') in our records. Please reach out to the finanacial office. Thank you',
+                'We were unable to locate your account (' + obj.data.EmailAddress + ') in our records. Please reach out to the finanacial office. Thank you',
                 'error'
               )              
             }else{
-              window.localStorage.setItem('id', data.ID + ' - ' + data.EmailAddress);
+              window.localStorage.setItem('id', obj.data.ID + ' - ' + obj.data.EmailAddress);
               window.location.replace("https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec");
             }
             //take action based on true or false
