@@ -7,7 +7,7 @@
   </head>
 <body>
   
-  <h1>Sign in with Google - Test 15</h1>
+  <h1>Sign in with Google - Test 16</h1>
   <div id="g_id_onload"
      data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up"
      data-login_uri="https://oholeitorah.github.io/"
@@ -56,10 +56,18 @@
           .then(response => response.json())
           .then(data => {
             console.log(data);
+            if(!data.ID){
+              Swal.fire(
+                'Uh Oh!',
+                'We were unable to locate your account (' + data.EmailAddress + ') in our records. Please reach out to the finanacial office. Thank you',
+                'error'
+              )              
+            }else{
+              window.localStorage.setItem('id', data.ID + ' - ' + data.EmailAddress);
+              window.location.replace("https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec");
+            }
             //take action based on true or false
           });
-          console.log('were here!');
-//           window.location.replace("https://www.google.com");
         }
         
         window.onload = function () {
