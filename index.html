@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="google-signin-client_id" content="712871956261-l85reugeijrjs9donqeh4j6dboev17up.apps.googleusercontent.com">
     <style>
-      html { background: url(https://i.imgur.com/t1lsl85.jpg); padding: 50px; }
+      html {
+        background: #005C97;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #363795, #005C97);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #363795, #005C97); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
 
       .spinner {
         position: relative;
@@ -14,6 +18,7 @@
         background: #ec5840;
         border-radius: 100%;
         opacity: 0.7;
+        display: none;
       }
       .spinner:before {
         content: "...";
@@ -57,7 +62,7 @@
   </head>
 <body>
   
-  <h1>Sign in with Google - Test 20</h1>
+  <h1>Sign in with Google - Test 21</h1>
   <div id="g_id_onload"
      data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up"
      data-login_uri="https://oholeitorah.github.io/"
@@ -73,7 +78,7 @@
      data-logo_alignment="left">
   </div> -->
   
-  <div class="spinner"></div>
+  <div id = 'spinner' class="spinner"></div>
 
 
 
@@ -87,6 +92,7 @@
   
       <script>
         function handleCredentialResponse(response) {
+          document.getElementById('spinner').style.display = 'block';
           console.log("Encoded JWT ID token: " + response.credential);
           var response = decodeJwtResponse(response.credential);
           var options = {
