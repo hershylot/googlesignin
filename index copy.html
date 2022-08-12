@@ -85,6 +85,7 @@
       </style>
   </head>
 <body>
+<img src = "https://res.cloudinary.com/oholeitorah/images/f_auto,q_auto/v1636864448/Oholei-Torah-Logo-Color/Oholei-Torah-Logo-Color.png?_i=AA" width="180px" height="180" background-color='#78909c' class = 'hide-on-small-only'>
   <h1>Welcome to the Oholei Torah Employee Portal! Please sign in. Testing 3</h1>
   <div id="g_id_onload"
      data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up"
@@ -92,7 +93,19 @@
      data-auto_select="true"
      data-auto_prompt="false">
   </div>
+<!--   <div class="g_id_signin"
+     data-type="standard"
+     data-size="large"
+     data-theme="outline"
+     data-text="sign_in_with"
+     data-shape="rectangular"
+     data-logo_alignment="left">
+  </div> -->
+  
   <div id = 'spinner' class="spinner"></div>
+
+
+
 <!--   <script src="https://apis.google.com/js/platform.js" async defer></script> -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -107,7 +120,38 @@
           document.getElementById('spinner').style.display = 'block';
 //           console.log("Encoded JWT ID token: " + response.credential);
           var response = decodeJwtResponse(response.credential);
-          parent.postMessage(response, '*')
+          var options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+            },
+            body: JSON.stringify(response),
+            redirect: 'follow',
+//             mode: 'no-cors',
+//             Headers: {
+//               Accept: 'application.json',
+//               'Content-Type': 'application/json'
+//             },
+//             Body: JSON.stringify(response),
+//             Cache: 'default'            
+          }
+          fetch('https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec', options)
+          .then(response => response.json())
+          .then(obj => {
+            if(!obj.data.Token){
+              Swal.fire(
+                'Uh Oh!',
+                'We were unable to locate your account (' + obj.data.EmailAddress + ') in our records. Please reach out to the finanacial office. Thank you',
+                'error'
+              )              
+            }else{
+              var url = "https://script.google.com/macros/s/AKfycbzusu6YEhHM43g0mlpCggmuRFs4ivQvYLIzXrXtp3Apbh7dCmZgWxTBcgRemdenUhbYxA/exec";
+//               var url = 'https://script.google.com/macros/s/AKfycbyfm5xcGVltc8ompazPUg-R_egdmuyeamn5S4NMsvIm/dev';
+              var params = `?token=${obj.data.Token}`;
+              window.location.replace(url + params);
+            }
+            //take action based on true or false
+          });
         }
         
         window.onload = function () {
@@ -119,7 +163,7 @@
             document.getElementById("buttonDiv"),
             { theme: "outline", size: "large" }  // customization attributes
           );
-          // google.accounts.id.prompt(); // also display the One Tap dialog
+          google.accounts.id.prompt(); // also display the One Tap dialog
         }
         
         function decodeJwtResponse(token){
