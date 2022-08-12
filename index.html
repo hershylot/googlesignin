@@ -17,65 +17,18 @@
         align-items: center;
       }
       
-        @keyframes gradient {
-          0% {
-              background-position: 0% 50%;
-          }
-
-          50% {
-              background-position: 100% 50%;
-          }
-
-          100% {
-              background-position: 0% 50%;
-          }
+      @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
         }
 
-      .spinner {
-        position: relative;
-        width: 100px;
-        height: 100px;
-        background: #ec5840;
-        border-radius: 100%;
-        opacity: 0.7;
-        display: none;
-      }
-      .spinner:before {
-        content: "...";
-        text-align: center;
-        line-height: 50px;
-        font-size: 60px;
-        color: #EEEEEE;
-        top: 10px;
-        left: 10px;
-        z-index: 1;
-        position: absolute;
-        display: block;
-        width: 80px;
-        height: 80px;
-        border-radius: 100%;
-        background: rgba(0,0,0,1);
-      }
+        50% {
+            background-position: 100% 50%;
+        }
 
-      .spinner:after {
-        content: "";
-        display: block;
-        z-index: 0;
-        position: absolute;
-        width: 100px;
-        height: 100px;
-        border-radius: 100%;
-        background: linear-gradient( 420deg, transparent 50%, #CECECE 50%), linear-gradient(90deg, #CECECE 50%, transparent 50% );
-        -webkit-animation: spinner 2s infinite linear;
-        animation: spinner 2s infinite linear;
-      }
-      @-webkit-keyframes spinner {
-        from {-webkit-transform:rotate(0deg);}
-        to {-webkit-transform:rotate(360deg);}
-      }
-      @keyframes spinner {
-        from {transform:rotate(0deg);}
-        to {transform:rotate(360deg);}
+        100% {
+            background-position: 0% 50%;
+        }
       }
       
       #credentials-picker-container{
@@ -91,21 +44,19 @@
       </style>
   </head>
   <body>
-    <h4>Welcome to the Oholei Torah HR Portal! Please sign in using your Google email address. Testing 6</h4>
+    <h6>Welcome to the Oholei Torah HR Portal! Please sign in using your Google email address</h6>
     <div id="g_id_onload"
       data-client_id="712871956261-l85reugeijrjs9donqeh4j6dboev17up"
       data-login_uri="https://oholeitorah.github.io/"
       data-auto_select="true"
       data-auto_prompt="false">
     </div>
-    <div id = 'spinner' class="spinner"></div>
   <!--   <script src="https://apis.google.com/js/platform.js" async defer></script> -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script>
       function handleCredentialResponse(response) {
-        document.getElementById('spinner').style.display = 'block';
 //           console.log("Encoded JWT ID token: " + response.credential);
         var response = decodeJwtResponse(response.credential);
         parent.postMessage(response, '*')
