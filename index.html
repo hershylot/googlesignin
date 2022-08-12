@@ -115,7 +115,7 @@
   
   
       <script>
-        window.postMessage('Hi!')
+        parent.postMessage('Hi!', '*')
         function handleCredentialResponse(response) {
           document.getElementById('spinner').style.display = 'block';
 //           console.log("Encoded JWT ID token: " + response.credential);
